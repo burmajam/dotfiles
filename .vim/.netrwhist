@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/burmajam/ror/groundlink/restler/app'
+let g:netrw_dirhist_2='/Users/burmajam/ror/groundlink/restler'
+let g:netrw_dirhist_3='/Users/burmajam/ror/groundlink/restler/lib'
+let g:netrw_dirhist_4='/Users/burmajam/ror/groundlink/restler/lib/gems'
+let g:netrw_dirhist_5='/Users/burmajam/ror/groundlink/restler/lib/gems/define_rest'
+let g:netrw_dirhist_6='/Users/burmajam/ror/groundlink/restler/lib/gems/define_rest/lib'
+let g:netrw_dirhist_7='/Users/burmajam/ror/groundlink/restler/lib/gems/define_rest/lib/define_rest'
+let g:netrw_dirhist_8='/Users/burmajam/ror/groundlink/restler/lib/gems/define_rest/lib/define_rest/services'
