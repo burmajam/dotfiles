@@ -63,6 +63,10 @@ set wildmode=longest,list
 " make tab completion for files/buffers act like bash
 set wildmenu
 let mapleader=","
+" use :W same as :w
+command! W :w
+" same goes for :Q
+command! Q :q
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
