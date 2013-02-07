@@ -13,9 +13,9 @@
 [alias]
   aa = add --all
   st = status
-  ci = commit
+  ci = commit -m
   cia = commit -a -m
-  ammend = commit --amend -C HEAD
+  am = commit --amend -C HEAD
   br = branch
   co = checkout
   df = diff
