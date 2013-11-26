@@ -33,5 +33,3 @@
   ign = ls-files -o -i --exclude-standard
 [color]
 	ui = true
-[push]
-	default = simple
