@@ -139,6 +139,9 @@ nmap <F1> :.w !pbcopy<CR><CR>
 vmap <F1> :w !pbcopy<CR><CR>
 nmap <F2> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 imap <F2> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+" Search in project word under the cursor
+map <leader>s :Ack <C-R><C-W> --ignore-dir coverage --ignore-dir log<CR><CR>
+map <leader>S :ccl<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
