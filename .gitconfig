@@ -3,6 +3,7 @@
 	email = burmajam@gmail.com
 [core]
 	excludesfile = /Users/burmajam/.gitignore_global
+	autocrlf = input
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -32,3 +33,5 @@
   ign = ls-files -o -i --exclude-standard
 [color]
 	ui = true
+[push]
+	default = simple
