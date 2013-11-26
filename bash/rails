@@ -2,5 +2,6 @@ alias r='rails'
 alias rdbm='rake db:migrate'
 alias tld='tail -f log/development.log'
 alias tlt='tail -f log/test.log'
+alias tlq='tail -f log/qa.log'
 function spc() { script/test "$@" ;}
 function cuke() { script/features "$@" ;}
