@@ -132,8 +132,8 @@ function! MapCR()
 endfunction
 call MapCR()
 nnoremap <leader><leader> <c-^>
-map <C-k> :bnext<CR>
-map <C-j> :bprevious<CR>
+map <c-n> :bnext<CR>
+map <c-b> :bprevious<CR>
 " set clipboard things
 set pastetoggle=<F8>
 nmap <F1> :.w !pbcopy<CR><CR>
