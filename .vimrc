@@ -132,6 +132,8 @@ function! MapCR()
 endfunction
 call MapCR()
 nnoremap <leader><leader> <c-^>
+map <C-k> :bnext<CR>
+map <C-j> :bprevious<CR>
 " set clipboard things
 set pastetoggle=<F8>
 nmap <F1> :.w !pbcopy<CR><CR>
@@ -141,6 +143,8 @@ imap <F2> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 " Search in project word under the cursor
 map <leader>u :Ack <C-R><C-W> --ignore-dir vendor --ignore-dir coverage --ignore-dir log<CR><CR>
 map <leader>U :ccl<CR>
+" Run ruby file
+map <leader>r :w\|:!ruby %<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
