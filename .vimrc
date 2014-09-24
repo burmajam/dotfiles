@@ -67,6 +67,7 @@ let mapleader=","
 command! W :w
 " same goes for :Q
 command! Q :q
+set foldmethod=syntax
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS

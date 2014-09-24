@@ -1,4 +1,5 @@
 alias tb='torquebox'
-export TORQUEBOX_HOME=/Users/burmajam/.rvm/gems/jruby-1.7.2@torquebox/gems/torquebox-server-2.3.0-java
-export JBOSS_HOME=/Users/burmajam/.rvm/gems/jruby-1.7.2@torquebox/gems/torquebox-server-2.3.0-java/jboss
+#export TORQUEBOX_HOME=/Users/burmajam/.rvm/gems/jruby-1.7.2@torquebox/gems/torquebox-server-2.3.0-java
+#export JBOSS_HOME=/Users/burmajam/.rvm/gems/jruby-1.7.2@torquebox/gems/torquebox-server-2.3.0-java/jboss
 #export JRUBY_HOME=/Users/burmajam/.rvm/rubies/jruby-1.7.2
+#export PATH=$JRUBY_HOME/bin:$PATH
