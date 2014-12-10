@@ -249,6 +249,8 @@ function! InlineVariable()
 endfunction
 nnoremap <leader>ri :call InlineVariable()<cr>
 
+" Ignore path in CommandT searches
+:set wildignore+=vendor,deps,_build
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
