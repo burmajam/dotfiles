@@ -251,6 +251,8 @@ nnoremap <leader>ri :call InlineVariable()<cr>
 
 " Ignore path in CommandT searches
 :set wildignore+=vendor,deps,_build
+" Fuck git root
+:let g:CommandTTraverseSCM = 'pwd'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
