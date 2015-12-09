@@ -1,5 +1,5 @@
 " Ignore _build folder in CommandT searches
-:set wildignore+=_build,deps
+:set wildignore+=_build,deps,cover,rel
 
 " Insert a function documentation sceleton with <ctrl-i><ctrl-d>
 imap <C-I><C-D> @doc """<cr>"""<esc>O
