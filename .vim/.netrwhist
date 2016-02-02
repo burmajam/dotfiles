@@ -1,8 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/'
 let g:netrw_dirhist_2='/Users/burmajam/ror/groundlink/notification_broker/lib/notification_broker'
 let g:netrw_dirhist_3='/Users/burmajam/ror/groundlink/vendors'
 let g:netrw_dirhist_4='/Users/burmajam/.rvm/gems/ruby-2.0.0-p481@api-v1.1/gems/activesupport-4.1.4'
 let g:netrw_dirhist_5='/Users/burmajam/.rvm/gems/ruby-2.0.0-p481@api-v1.1/gems/activesupport-4.1.4/lib'
 let g:netrw_dirhist_6='/Users/burmajam/dotfiles/.vim/bundle/vim-powerline'
+let g:netrw_dirhist_7='/Users/burmajam/elixir/betty_umbrella/apps/betradar_persister'
+let g:netrw_dirhist_8='/Users/burmajam/elixir/betty_umbrella/apps/betradar_persister/config'

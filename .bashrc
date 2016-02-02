@@ -16,3 +16,4 @@ source ~/dotfiles/history_backup
 set -o vi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex" # Kiex support
