@@ -1,0 +1,7 @@
+alias qpods='kubectl get pod'
+function qlog() { kubectl logs "$@" -f;}
+function qdel() { kubectl delete pod "$@";}
+function qdeploy() { kubectl rolling-update "$1" --image=gcr.io/freight-hub/"$1":0.0.1-"$2" --update-period=1s --poll-interval=2s;}
+alias qctx='kubectl config current-context'
+alias qviewctx='kubectl config view'
+function qsetctx() { kubectl config use-context gke_freight-hub_us-central1-c_fh-"$@"; }

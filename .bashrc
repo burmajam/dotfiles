@@ -8,6 +8,7 @@ export PATH="/usr/local/heroku/bin:/usr/local/bin:$PATH"
 . ~/dotfiles/bash/rails
 . ~/dotfiles/bash/torquebox
 . ~/dotfiles/bash/rvm-git-prompt
+. ~/dotfiles/bash/kubernetes
 
 HISTSIZE=90000
 source ~/dotfiles/history_backup
@@ -17,3 +18,6 @@ set -o vi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex" # Kiex support
+
+# For FreightHUB testing
+export FH_EMAIL_TO="milan.burmaja@vibe.rs"
