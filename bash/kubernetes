@@ -1,7 +1,21 @@
 alias qpods='kubectl get pod'
-function qlog() { kubectl logs "$@" -f;}
 function qdel() { kubectl delete pod "$@";}
-function qdeploy() { kubectl rolling-update "$1" --image=gcr.io/freight-hub/"$1":0.0.1-"$2" --update-period=1s --poll-interval=2s;}
 alias qctx='kubectl config current-context'
 alias qviewctx='kubectl config view'
 function qsetctx() { kubectl config use-context gke_freight-hub_us-central1-c_fh-"$@"; }
+function qdown() { kubectl scale rc/"$@" --replicas=0; }
+function qup() { kubectl scale rc/"$@" --replicas=1; }
+
+function qlog() {
+  v="$1"
+  NAME=${v/_/-}
+  POD=`qpods | awk '{print $1}' | grep $NAME`
+  echo "Tailing log for:" $POD
+  kubectl logs $POD -f
+}
+
+function qdeploy() { 
+  arg1="$1"
+  ctrl=${arg1/_/-}
+  kubectl rolling-update ctrl --image=gcr.io/freight-hub/"$1":0.0.1-"$2" --update-period=1s --poll-interval=2s
+}
