@@ -19,5 +19,9 @@ set -o vi
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex" # Kiex support
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
 # For FreightHUB testing
 export FH_EMAIL_TO="milan.burmaja@vibe.rs"
