@@ -5,6 +5,13 @@ function qsetctx() { kubectl config use-context gke_freight-hub_us-central1-c_fh
 function qdown() { kubectl scale rc/"$@" --replicas=0; }
 function qup() { kubectl scale rc/"$@" --replicas=1; }
 
+function qpodname(){
+  kubectl get pods |grep $1 |awk '{print $1}'
+}
+function qssh(){
+  kubectl exec -ti `qpodname $1` /bin/bash
+}
+
 function qpods() {
   if [ $# -eq 0 ]; then
     kubectl get pod
