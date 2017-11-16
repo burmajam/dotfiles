@@ -1,5 +1,6 @@
+:source $HOME/.vimrc
 " Ignore _build folder in CommandT searches
-:set wildignore+=_build,deps,cover,rel
+:set wildignore+=_build,deps,cover,doc,gettext,log
 
 " Insert a function documentation sceleton with <ctrl-i><ctrl-d>
 imap <C-I><C-D> @doc """<cr>"""<esc>O
