@@ -114,3 +114,5 @@ function! RunTests(filename)
     end
 endfunction
 
+" search and replace logger text with anonymous function 
+nnoremap <leader>sl :%s/Logger\.\(debug\\|info\\|warn\\|error\) \(".\+"\)/Logger\.\1 fn -> \2 end/gc<cr>

@@ -11,9 +11,9 @@ set hidden
 " remember more commands and search history
 set history=10000
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set autoindent
 set showmatch
 set incsearch
@@ -416,3 +416,8 @@ let g:Powerline_colorscheme = 'solarized256'
 set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
+
+" search and replace word under cursor - current line
+nnoremap <leader>sc :s/<c-r><c-w>//g<left><left>
+" search and replace word under cursor - all lines
+nnoremap <leader>sa :%s/<c-r><c-w>//gc<left><left><left>

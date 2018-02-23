@@ -1,0 +1,13 @@
+# grep elixir project
+function grepex() {
+  location="./"
+  if [ $# -eq 0 ]; then
+    echo "Search pattern required!"
+    return 1
+  fi
+  if [ $# -eq 2 ]; then
+    location=$2
+  fi
+  echo "Searching for '$1' at '$location':"
+  grep -lr --exclude-dir=deps --exclude-dir=_build --include=*.ex --include=*.exs $1 $location 
+}

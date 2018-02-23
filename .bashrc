@@ -6,9 +6,11 @@ export LC_ALL=en_US.UTF-8
 export PATH="/usr/local/heroku/bin:/usr/local/bin:$PATH"
 
 . ~/dotfiles/bash/rails
-. ~/dotfiles/bash/torquebox
+#. ~/dotfiles/bash/torquebox
 . ~/dotfiles/bash/rvm-git-prompt
 . ~/dotfiles/bash/kubernetes
+. ~/dotfiles/bash/elixir
+. ~/dotfiles/bash/git
 
 HISTSIZE=90000
 source ~/dotfiles/history_backup
