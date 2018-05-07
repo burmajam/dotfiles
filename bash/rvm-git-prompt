@@ -30,7 +30,7 @@ function __ex_version {
 
 function __gke_env {
     if hash kubectl 2>/dev/null ; then
-        echo ":`kubectl config current-context  | sed 's/gke_freight-hub_us-central1-c_\(.*\)/\1/'`"
+        echo ":`kubectl config current-context  | sed 's/gke_freight-hub_us-central1-c_\(.*\)/\1/' | sed 's/gke_global-freight-tracking-202214_us-central1-b_\(.*\)/\1/'`"
     fi
 }
 

@@ -1,7 +1,15 @@
 function qdel() { kubectl delete pod "$@";}
 alias qctx='kubectl config current-context'
 alias qviewctx='kubectl config view'
-function qsetctx() { kubectl config use-context gke_freight-hub_us-central1-c_fh-"$@"; }
+function qsetctx() { 
+  if [[ $1 == fh-* ]]; then
+    kubectl config use-context gke_freight-hub_us-central1-c_"$1";
+  elif [[ $1 == gft-* ]]; then
+    kubectl config use-context gke_global-freight-tracking-202214_us-central1-b_"$1";
+  else
+    kubectl config use-context "$1";
+  fi
+}
 function qdown() { kubectl scale rc/"$@" --replicas=0; }
 function qup() { kubectl scale rc/"$@" --replicas=1; }
 
