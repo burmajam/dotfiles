@@ -28,6 +28,12 @@ function __ex_version {
   fi
 }
 
+function __docker_repo {
+  if hash docker 2>/dev/null ; then
+    echo "`docker info | grep \"Name: \" | sed 's/Name: \(.*\)/\1/'`"
+  fi
+}
+
 function __gke_env {
     if hash kubectl 2>/dev/null ; then
         echo ":`kubectl config current-context  | sed 's/gke_freight-hub_us-central1-c_\(.*\)/\1/' | sed 's/gke_global-freight-tracking-202214_us-central1-b_\(.*\)/\1/'`"
@@ -71,7 +77,7 @@ bash_prompt() {
   # reset
   local RESET="\[\033[0;37m\]"
 
-  PS1="\t $BY\$(__name_and_server)$Y\w[$C\$(__asdf_prompt)$W\$(__gke_env)$G\$(__git_prompt)$RESET]$ "
+  PS1="\t $BY\$(__name_and_server)$Y\w[$C\$(__asdf_prompt)$W\$(__gke_env):$C\$(__docker_repo)$G\$(__git_prompt)$RESET]$ "
 
 }
 
