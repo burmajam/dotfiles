@@ -25,5 +25,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 # For FreightHUB testing
 export FH_EMAIL_TO="milan.burmaja@vibe.rs"
