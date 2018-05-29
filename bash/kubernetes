@@ -10,8 +10,6 @@ function qsetctx() {
     kubectl config use-context "$1";
   fi
 }
-function qdown() { kubectl scale rc/"$@" --replicas=0; }
-function qup() { kubectl scale rc/"$@" --replicas=1; }
 
 function qpodname(){
   kubectl get pods |grep $1 |awk '{print $1}'
@@ -24,33 +22,29 @@ function qpods() {
   if [ $# -eq 0 ]; then
     kubectl get pod
   else
-    ctx="$1"
-    kubectl get pod --context="gke_freight-hub_us-central1-c_fh-$ctx"
+    if [[ $1 == fh-* ]]; then
+      ctx=gke_freight-hub_us-central1-c_"$1";
+    elif [[ $1 == gft-* ]]; then
+      ctx=gke_global-freight-tracking-202214_us-central1-b_"$1";
+    else
+      ctx="$1";
+    fi
+    kubectl get pod --context=$ctx
   fi
 }
   
+#https://github.com/johanhaleby/kubetail
 function qlog() {
   if [ $# -eq 1 ]; then
-    ctx=dev
+    kubetail $1
   else
-    ctx="$2"
-    context=gke_freight-hub_us-central1-c_fh-$ctx
+    if [[ $2 == fh-* ]]; then
+      ctx=gke_freight-hub_us-central1-c_"$2";
+    elif [[ $2 == gft-* ]]; then
+      ctx=gke_global-freight-tracking-202214_us-central1-b_"$2";
+    else
+      ctx="$2";
+    fi
+    kubetail $1 -t $ctx
   fi
-  context=gke_freight-hub_us-central1-c_fh-$ctx
-  v="$1"
-  NAME=${v/_/-}
-  POD=`qpods $ctx | awk '{print $1}' | grep $NAME`
-  echo "Tailing log for:" $POD " for ENV:" $context
-  kubectl logs $POD -f --context=$context
-}
-
-function qdeploy() { 
-  if [ $# -eq 2 ]; then
-    context=gke_freight-hub_us-central1-c_fh-dev
-  else
-    context=gke_freight-hub_us-central1-c_fh-"$3"
-  fi
-  arg1="$1"
-  ctrl=${arg1/_/-}
-  kubectl rolling-update $ctrl --image=gcr.io/freight-hub/"$1":0.0.1-"$2" --update-period=1s --poll-interval=2s --context=$context
 }
