@@ -2,6 +2,9 @@
 " vim:set ts=2 sts=2 sw=2 expandtab:
 
 call pathogen#runtime_append_all_bundles()
+"
+" Ignore _build folder and friends in CommandT searches
+:set wildignore+=_build,deps,cover,doc,gettext,log,node_modules
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -144,8 +147,15 @@ imap <F2> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 " Search in project word under the cursor
 map <leader>u :Ack <C-R><C-W> --ignore-dir vendor --ignore-dir coverage --ignore-dir log<CR><CR>
 map <leader>U :ccl<CR>
-" Run ruby file
-map <leader>r :w\|:!ruby %<CR>
+
+" Insert a function documentation sceleton with <ctrl-i><ctrl-d>
+imap <C-I><C-D> @doc """<cr>"""<esc>O
+imap <C-I><C-M> @moduledoc """<cr>"""<esc>O
+imap <C-I><C-E> <cr>## Example<cr>    iex><space>
+
+" Run elixir file
+map <leader>r :w\|:!./run.sh<CR>
+map <leader>x :w\|:!iex -S mix<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -252,13 +262,16 @@ endfunction
 nnoremap <leader>ri :call InlineVariable()<cr>
 
 " Ignore path in CommandT searches
-:set wildignore+=vendor,deps,_build
+:set wildignore+=_build,deps,cover,doc,gettext,log
 " Fuck git root
 :let g:CommandTTraverseSCM = 'pwd'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gr :topleft :split config/routes.rb<cr>
+map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+map <leader>gr :topleft :split web/router.ex<cr>
 function! ShowRoutes()
   " Requires 'scratch' plugin
   :topleft 100 :split __Routes__
@@ -267,7 +280,7 @@ function! ShowRoutes()
   " Delete everything
   :normal 1GdG
   " Put routes output in buffer
-  :0r! bundle exec rake -s routes
+  :0r! mix phoenix.routes
   " Size window to number of lines (1 plus rake output length)
   :exec ":normal " . line("$") . _ "
   " Move cursor to bottom
@@ -276,18 +289,15 @@ function! ShowRoutes()
   :normal dd
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
 map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
-map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-map <leader>gg :topleft 100 :split Gemfile<cr>
-map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+map <leader>gg :topleft 100 :split mix.exs<cr>
+" Phoenix specific
+map <leader>gv :CommandTFlush<cr>\|:CommandT web/views<cr>
+map <leader>gt :CommandTFlush<cr>\|:CommandT web/templates<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT web/controllers<cr>
+map <leader>gm :CommandTFlush<cr>\|:CommandT web/models<cr>
+map <leader>gp :CommandTFlush<cr>\|:CommandT priv<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT priv/static/css<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
@@ -299,21 +309,19 @@ endfunction
 function! AlternateForCurrentFile()
   let current_file = expand("%")
   let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
+  let in_spec = match(current_file, '^test/') != -1
   let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
+  let in_app = match(current_file, '\<lib\>') != -1
   if going_to_spec
     if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
+      let new_file = substitute(new_file, '^lib/', '', '')
     end
-    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let new_file = 'spec/' . new_file
+    let new_file = substitute(new_file, '\.ex$', '_test.exs', '')
+    let new_file = 'test/' . new_file
   else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
+    let new_file = substitute(new_file, '_test\.exs$', '.ex', '')
+    let new_file = substitute(new_file, '^test/', '', '')
+    let new_file = 'lib/' . new_file
   endif
   return new_file
 endfunction
@@ -336,7 +344,7 @@ function! RunTestFile(...)
     endif
 
     " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    let in_test_file = match(expand("%"), '\(_test.exs\)$') != -1
     if in_test_file
         call SetTestFile()
     elseif !exists("t:grb_test_file")
@@ -347,7 +355,7 @@ endfunction
 
 function! RunNearestTest()
     let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
+    call RunTestFile(" --only line:" . spec_line_number)
 endfunction
 
 function! SetTestFile()
@@ -364,16 +372,10 @@ function! RunTests(filename)
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features --guess " . a:filename
+    if filereadable("script/test")
+        exec ":!script/test " . a:filename
     else
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
+        exec ":!mix test " . a:filename
     end
 endfunction
 

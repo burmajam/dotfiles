@@ -27,5 +27,13 @@ fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+# Helm
+if [ -f helm ]; then
+  . helm completion bash
+fi
+
+# Istio
+export PATH="$PATH:$HOME/istio-1.0.4/bin"
+
 # For FreightHUB testing
 export FH_EMAIL_TO="milan.burmaja@vibe.rs"
