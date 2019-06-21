@@ -147,6 +147,8 @@ imap <F2> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 " Search in project word under the cursor
 map <leader>u :Ack <C-R><C-W> --ignore-dir vendor --ignore-dir coverage --ignore-dir log<CR><CR>
 map <leader>U :ccl<CR>
+" Git
+map <leader>gb :Gblame<CR>
 
 " Insert a function documentation sceleton with <ctrl-i><ctrl-d>
 imap <C-I><C-D> @doc """<cr>"""<esc>O
@@ -155,6 +157,12 @@ imap <C-I><C-E> <cr>## Example<cr>    iex><space>
 
 " Run elixir file
 map <leader>r :w\|:!./run.sh<CR>
+map <leader>rd :w\|:!mix dialyzer<CR>
+map <leader>rx :w\|:!mix docs<CR>
+map <leader>rt :w\|:!mix coveralls.html<CR>
+map <leader>rpc :w\|:!MIX_ENV=test mix propcheck.clean<CR>
+map <leader>rf :w\|:!mix format<CR>l<CR>
+map <leader>rb :w\|:!mix bless<CR>
 map <leader>x :w\|:!iex -S mix<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
@@ -400,11 +408,11 @@ function! OpenChangedFiles()
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" InsertTime COMMAND
-" Insert the current time
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" InsertTime COMMAND
+"" Insert the current time
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Powerline support
@@ -423,3 +431,5 @@ set termencoding=utf-8
 nnoremap <leader>sc :s/<c-r><c-w>//g<left><left>
 " search and replace word under cursor - all lines
 nnoremap <leader>sa :%s/<c-r><c-w>//gc<left><left><left>
+" format elixir code on save
+"autocmd BufWritePost *.exs,*.ex silent :!mix format %

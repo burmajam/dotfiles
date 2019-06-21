@@ -1,6 +1,7 @@
 # Perl argues about these in Command-T
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export NODE_COOKIE=BURMAJAM_SUPER_SECRET
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:/usr/local/bin:$PATH"

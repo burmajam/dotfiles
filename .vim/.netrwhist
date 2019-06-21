@@ -1,10 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/burmajam/elixir/fh/apps/backoffice_reader/lib'
-let g:netrw_dirhist_2='/Users/burmajam/elixir/fh/apps/bo_listeners'
-let g:netrw_dirhist_3='/Users/burmajam/elixir/fh/apps/fh_api'
-let g:netrw_dirhist_4='/Users/burmajam/elixir/fh/apps/fh_api/web'
-let g:netrw_dirhist_5='/Users/burmajam/elixir/fh/apps/users'
-let g:netrw_dirhist_6='/Users/burmajam/elixir/fh/apps'
-let g:netrw_dirhist_7='/Users/burmajam/elixir/fh/apps/passport'
-let g:netrw_dirhist_8='/Users/burmajam/elixir/fh/apps/passport/lib'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/milan.burmaja/wrk/gft/repos/backend/k8s/minikube'
+let g:netrw_dirhist_2='/Users/milan.burmaja/wrk/wunder/repos/phoenix-root/bin/charts'

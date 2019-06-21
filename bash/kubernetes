@@ -2,13 +2,7 @@ function qdel() { kubectl delete pod "$@";}
 alias qctx='kubectl config current-context'
 alias qviewctx='kubectl config view'
 function qsetctx() { 
-  if [[ $1 == fh-* ]]; then
-    kubectl config use-context gke_freight-hub_us-central1-c_"$1";
-  elif [[ $1 == gft-* ]]; then
-    kubectl config use-context gke_global-freight-tracking-202214_us-central1-b_"$1";
-  else
-    kubectl config use-context "$1";
-  fi
+  kubectl config use-context "$1";
 }
 
 function qpodname(){
@@ -19,32 +13,10 @@ function qssh(){
 }
 
 function qpods() {
-  if [ $# -eq 0 ]; then
-    kubectl get pod
-  else
-    if [[ $1 == fh-* ]]; then
-      ctx=gke_freight-hub_us-central1-c_"$1";
-    elif [[ $1 == gft-* ]]; then
-      ctx=gke_global-freight-tracking-202214_us-central1-b_"$1";
-    else
-      ctx="$1";
-    fi
-    kubectl get pod --context=$ctx
-  fi
+  kubectl get pod
 }
   
 #https://github.com/johanhaleby/kubetail
 function qlog() {
-  if [ $# -eq 1 ]; then
-    kubetail $1
-  else
-    if [[ $2 == fh-* ]]; then
-      ctx=gke_freight-hub_us-central1-c_"$2";
-    elif [[ $2 == gft-* ]]; then
-      ctx=gke_global-freight-tracking-202214_us-central1-b_"$2";
-    else
-      ctx="$2";
-    fi
-    kubetail $1 -t $ctx
-  fi
+  kubetail $1
 }
